@@ -10,36 +10,73 @@
 输出样例
 6
 */
+
 #include <stdio.h>
 #include <stdlib.h>
-int compare(int x,int list[]){
-    
-}
 int main(){
-    int nums;
-    int endnode,beginode;
-    int tl;//起始节目位置
-    scanf("%d",&nums);
-    int begin[nums];
-    int end[nums];
-    int time[nums];
-    for (int i = 0; i < nums; i++){
-        scanf("%d %d",&begin[i],&end[i]);
-        time[i]=end[i]-begin[i];
+    int n;
+    int t;
+    int i,j;
+    int num = 0;
+    scanf("%d", &n);
+    int begin[n];
+    int end[n];
+    int s1[n];
+    for (int k = 0; k < n; k++){
+        s1[k] = 0;
     }
-
-    for (int t=0;t<=24;t++){
-        for (int j = 0; j < nums; j++){
-            if (begin[j]==t){
-                tl=j;
+    int s[n];
+    for(i = 0; i < n; i++){
+        scanf("%d %d", &begin[i], &end[i]);
+        s[i] = i + 1;
+    }
+    /*先对输入时间进行排序，考虑结尾的影响效果，先对结尾进行比较*/
+    for(i = 0; i < n - 1; i++){
+        for(j = 0; j < n - i - 1; j++){
+            if(end[j] > end[j + 1]){
+                //交换两个时间段
+                t = begin[j];
+                begin[j] = begin[j + 1];
+                begin[j + 1] = t;
+                t = end[j];
+                end[j] = end[j + 1];
+                end[j + 1] = t;
+                //交换对应时间段的位置数
+                t = s[j];
+                s[j] = s[j + 1];
+                s[j + 1] = t;
+            }
+            else if(end[j] == end[j + 1]){//结尾相同的情况下查看开头位置
+                if(begin[j] > begin[j + 1]){
+                    //交换两个时间段
+                    t = begin[j];
+                    begin[j] = begin[j + 1];
+                    begin[j + 1] = t;
+                    t = end[j];
+                    end[j] = end[j + 1];
+                    end[j + 1] = t;
+                    //交换对应时间段的位置数
+                    t = s[j];
+                    s[j] = s[j + 1];
+                    s[j + 1] = t;
+                }
             }
         }
     }
-    for (int j = 0; j < nums; j++){
-        if (end[j]<=end[tl]){
-                tl=j;
-            }
+    int ed = 0;
+    i = 0;
+    while(i < n){
+        if(begin[i] >= ed){
+            s1[i] = 1;
+            ed = end[i];
+        }
+        i = i+1;
     }
-
+    for(i = 0; i < n; i++){
+        if(s1[i] == 1){
+            num = num+1;
+        }
+    }
+    printf("%d",num);
     return 0;
 }
