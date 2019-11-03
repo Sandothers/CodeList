@@ -12,6 +12,5 @@ int findMax(int preNum){
 }
 int main(){
     int x;
-    scanf("%d",&x);
     printf("%d",findMax(x));
 }
