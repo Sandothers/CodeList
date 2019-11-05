@@ -1,3 +1,6 @@
+/*
+题目见a.png
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
