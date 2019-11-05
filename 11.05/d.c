@@ -19,13 +19,16 @@ Sample 2：
 #include <stdlib.h>
 #include <stdio.h>
 int GCD(int a,int b){
+    int res;
     int tmp;
-    while(a%b!=0){
+    if(a<b){
         tmp=a;
         a=b;
-        b=tmp%b;
+        b=tmp;
     }
-    return b;
+    if(a%b!=0) res=GCD(b,a%b);
+    else res=b;
+    return res;
 }
 int main(){
     int a,b;
