@@ -22,15 +22,37 @@ Where there is hope ,there is a way.↙
 */
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
+void sort(char *a[], int size);
 int main(){
     int n;
-    char c;
-    char str[100000];
-    scanf("%d",&n);
-    char *a[n];
+    char st[100000];
+    char *ptr[100];
+    ptr[0] = st;
+    scanf("%d", &n);
     getchar();
-    gets(str);
-    while((c=getchar())=='\n')
+    for (int i = 0; i < n; i++){
+        gets(ptr[i]);
+        if (i != n-1)
+            ptr[i + 1] = ptr[i] + strlen(ptr[i]) + 1;
+    }
+    sort(ptr, n);
+    for (int i = 0; i < n; i++) puts(ptr[i]);
     return 0;
+}
+void sort(char *a[], int size){
+    char *temp;
+    int mark=0;
+    while(mark==0){
+        mark=1;
+        for(int i=0;i<size-1;i++){
+            if(strcmp(a[i],a[i+1])>0){
+                temp = a[i];
+                a[i] = a[i+1];
+                a[i+1] = temp;
+                mark=0;
+            }
+        }
+    }
 }
