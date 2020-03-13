@@ -49,7 +49,70 @@ Average Score:89.3
 #include <stdio.h>
 #include <stdlib.h>
 
+struct student{
+        char stuno[10];
+        char stuname[10];
+        int math;
+        int english;
+        int computer;
+    };
+typedef struct student Student;
+
+void operation(int num,int n,Student **list){
+    int i=0;
+    int pos=0;
+    Student tmp;
+    if(num==1){
+        scanf("%s %s %d %d %d",tmp.stuno,tmp.stuname,&tmp.math,&tmp.english,&tmp.computer);
+        if(!isRepeat(tmp.stuno,list,n)){
+            for(i=0;i<n;i++){
+                if(list[i]!=NULL){ 
+                    *list[i]=tmp;
+                    break;
+                }
+            }
+        }
+    }
+    else if(num==2){
+        scanf("%s",tmp.stuno);
+        pos=isRepeat(tmp.stuno,list,n);
+        if(pos!=0){
+           list[pos]=NULL;
+           printf("Delete success\n");
+        }
+        else{
+            printf("Students do not exist\n");
+        }
+    }
+    else if(num==3){
+
+    }
+    else if (num==4){
+        
+    }
+}
+
+int isRepeat(char* word,Student **list,int n){
+    int mark=0;
+    for(int i=0;i>n;i++){
+        if(word==list[i]->stuno){
+            mark=i;
+        }
+    }
+    return mark;
+}
+
+// int insert(Student **list,Student stu,int ){
+//     int pos;
+
+//     return pos;
+// }
 int main(){
     
+    int n;
+    scanf("%d",&n);
+    Student **list=(Student**)malloc((sizeof(Student*)*n));
+
+
     return 0;
 }
